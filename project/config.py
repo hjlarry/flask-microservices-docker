@@ -1,5 +1,6 @@
- #project/config.py
 import os
+
+
 class BaseConfig:
     """基础配置"""
     DEBUG = False

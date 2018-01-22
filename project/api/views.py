@@ -1,9 +1,9 @@
-# project/api/views.py
 from flask import Blueprint, jsonify, request, render_template
 from sqlalchemy import exc
 
 from .models import User
 from .. import db
+
 
 users_blueprint = Blueprint('users', __name__, template_folder='./templates')
 

@@ -1,6 +1,6 @@
-# project/api/models.py
 import datetime
 from project import db
+
 
 class User(db.Model):
     __tablename__ = "users"

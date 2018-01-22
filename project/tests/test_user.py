@@ -4,7 +4,6 @@ from project.api.models import User
 from project import db
 
 
-
 def add_user(username, email):
     user = User(username=username, email=email)
     db.session.add(user)
@@ -25,7 +24,7 @@ class TestUserService(BaseTestCase):
         with self.client:
             response = self.client.post(
                 '/users',
-                data = json.dumps(dict(username='cnych', email='123@qq.com')),
+                data=json.dumps(dict(username='cnych', email='123@qq.com')),
                 content_type='application/json'
             )
             data = json.loads(response.data.decode())
@@ -38,7 +37,7 @@ class TestUserService(BaseTestCase):
         with self.client:
             response = self.client.post(
                 '/users',
-                data = json.dumps(dict()),
+                data=json.dumps(dict()),
                 content_type='application/json'
             )
             data = json.loads(response.data.decode())
@@ -90,7 +89,7 @@ class TestUserService(BaseTestCase):
 
     def test_get_user(self):
         """测试获取单个用户详细信息"""
-        user=User(username='cnych', email='123@qq.com')
+        user = User(username='cnych', email='123@qq.com')
         db.session.add(user)
         db.session.commit()
         with self.client:
@@ -122,8 +121,8 @@ class TestUserService(BaseTestCase):
 
     def test_get_users(self):
         """测试获取用户列表"""
-        user1=User(username='cnych', email='123@qq.com')
-        user2=User(username='cnych1', email='1231@qq.com')
+        user1 = User(username='cnych', email='123@qq.com')
+        user2 = User(username='cnych1', email='1231@qq.com')
         db.session.add(user1)
         db.session.add(user2)
         db.session.commit()
@@ -131,8 +130,8 @@ class TestUserService(BaseTestCase):
             response = self.client.get('/users')
             data = json.loads(response.data.decode())
             self.assertEqual(response.status_code, 200)
-            self.assertEqual('cnych' , data['data']['users'][0]['username'])
-            self.assertEqual('1231@qq.com' , data['data']['users'][1]['email'])
+            self.assertEqual('cnych', data['data']['users'][0]['username'])
+            self.assertEqual('1231@qq.com', data['data']['users'][1]['email'])
             self.assertEqual('success', data['status'])
 
     def test_main_no_users(self):
@@ -164,4 +163,3 @@ class TestUserService(BaseTestCase):
             self.assertIn(b'All Users', response.data)
             self.assertNotIn(b'No users!', response.data)
             self.assertIn(b'cnych', response.data)
-
